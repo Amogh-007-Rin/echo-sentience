@@ -18,14 +18,14 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
+    <div className="min-h-screen bg-background relative overflow-auto">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background-secondary to-background opacity-90" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-cyan/5 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-neon-purple/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-blue/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
       
       {/* Main Content */}
-      <div className="relative z-10 h-screen flex flex-col">
+      <div className="relative z-10 min-h-screen flex flex-col">
         {/* Header */}
         <motion.header
           className="glass border-b border-glass-border p-4"
@@ -35,7 +35,7 @@ export default function Index() {
         >
           <div className="container mx-auto flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-neon-cyan to-neon-purple rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-r from-primary to-accent-blue rounded-lg flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-background" />
               </div>
               <div>
@@ -60,13 +60,14 @@ export default function Index() {
         </motion.header>
 
         {/* Main Layout */}
-        <div className="flex-1 flex">
+        <div className="flex-1 flex overflow-hidden">
           {/* Left Side - AI Globe */}
           <motion.div
-            className="w-1/3 border-r border-glass-border glass relative"
+            className="w-1/3 border-r border-glass-border glass relative overflow-hidden"
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            whileHover={{ scale: 1.02 }}
           >
             <div className="h-full flex flex-col">
               {/* Globe Container */}
@@ -112,13 +113,14 @@ export default function Index() {
 
           {/* Right Side - Chat/Dashboard */}
           <motion.div
-            className="flex-1 glass"
+            className="flex-1 glass overflow-hidden"
             initial={{ x: 20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
+            whileHover={{ boxShadow: "0 0 20px hsl(var(--primary) / 0.3)" }}
           >
-            <Tabs value={activeTab} className="h-full">
-              <TabsContent value="chat" className="h-full m-0">
+            <Tabs value={activeTab} className="h-full flex flex-col">
+              <TabsContent value="chat" className="h-full m-0 flex-1 overflow-hidden">
                 <ChatInterface
                   onEmotionDetected={handleEmotionDetected}
                   onListeningChange={setIsListening}
@@ -126,7 +128,7 @@ export default function Index() {
                 />
               </TabsContent>
               
-              <TabsContent value="dashboard" className="h-full m-0">
+              <TabsContent value="dashboard" className="h-full m-0 flex-1 overflow-hidden">
                 <EmotionDashboard />
               </TabsContent>
             </Tabs>
