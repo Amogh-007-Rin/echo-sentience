@@ -39,8 +39,8 @@ export default function Index() {
                 <Sparkles className="w-5 h-5 text-background" />
               </div>
               <div>
-                <h1 className="text-xl font-orbitron glow-text-cyan">Echo Sentience</h1>
-                <p className="text-xs text-muted-foreground">Emotional AI Companion</p>
+                <h1 className="text-xl font-mono glow-text-primary font-semibold">Echo Sentience</h1>
+                <p className="text-xs text-muted-foreground">Professional AI Assistant</p>
               </div>
             </div>
             
@@ -85,7 +85,7 @@ export default function Index() {
                   transition={{ duration: 0.3 }}
                   key={currentEmotion}
                 >
-                  <span className="text-sm font-orbitron glow-text-cyan capitalize">
+                  <span className="text-sm font-mono glow-text-primary capitalize">
                     {currentEmotion}
                   </span>
                 </motion.div>
@@ -94,13 +94,13 @@ export default function Index() {
               {/* AI Status */}
               <div className="p-4 border-t border-glass-border">
                 <div className="text-center space-y-2">
-                  <div className="text-sm font-orbitron glow-text-cyan">
-                    Neural Network Status
+                  <div className="text-sm font-mono glow-text-primary">
+                    System Status
                   </div>
                   <div className="flex justify-center gap-2">
-                    <div className="w-2 h-2 bg-neon-cyan rounded-full animate-pulse" />
-                    <div className="w-2 h-2 bg-neon-blue rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
-                    <div className="w-2 h-2 bg-neon-purple rounded-full animate-pulse" style={{ animationDelay: '0.4s' }} />
+                    <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                    <div className="w-2 h-2 bg-accent-blue rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
+                    <div className="w-2 h-2 bg-subtle-blue rounded-full animate-pulse" style={{ animationDelay: '0.4s' }} />
                   </div>
                   <div className="text-xs text-muted-foreground">
                     {isSpeaking ? 'Responding...' : isListening ? 'Processing...' : 'Ready to help'}

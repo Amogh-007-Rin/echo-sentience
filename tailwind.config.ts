@@ -30,7 +30,8 @@ export default {
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))',
-					glow: 'hsl(var(--primary-glow))'
+					glow: 'hsl(var(--primary-glow))',
+					cyan: 'hsl(var(--primary-cyan))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -38,7 +39,8 @@ export default {
 				},
 				accent: {
 					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))'
+					foreground: 'hsl(var(--accent-foreground))',
+					blue: 'hsl(var(--accent-blue))'
 				},
 				muted: {
 					DEFAULT: 'hsl(var(--muted))',
@@ -53,11 +55,12 @@ export default {
 					DEFAULT: 'hsl(var(--destructive))',
 					foreground: 'hsl(var(--destructive-foreground))'
 				},
-				neon: {
-					cyan: 'hsl(var(--neon-cyan))',
-					blue: 'hsl(var(--neon-blue))',
-					purple: 'hsl(var(--neon-purple))',
-					pink: 'hsl(var(--neon-pink))'
+				subtle: {
+					blue: 'hsl(var(--subtle-blue))'
+				},
+				warning: {
+					DEFAULT: 'hsl(var(--warning-orange))',
+					orange: 'hsl(var(--warning-orange))'
 				},
 				hover: {
 					DEFAULT: 'hsl(var(--hover))',
@@ -70,7 +73,7 @@ export default {
 				}
 			},
 			fontFamily: {
-				orbitron: ['Orbitron', 'monospace'],
+				mono: ['JetBrains Mono', 'monospace'],
 				inter: ['Inter', 'sans-serif']
 			},
 			borderRadius: {
@@ -105,10 +108,10 @@ export default {
 				},
 				'glow-pulse': {
 					'0%, 100%': { 
-						boxShadow: '0 0 20px hsl(var(--neon-cyan) / 0.4)' 
+						boxShadow: '0 0 20px hsl(var(--primary) / 0.4)' 
 					},
 					'50%': { 
-						boxShadow: '0 0 60px hsl(var(--neon-cyan) / 0.8)' 
+						boxShadow: '0 0 60px hsl(var(--primary) / 0.8)' 
 					}
 				},
 				'rotate-slow': {

@@ -22,14 +22,14 @@ function GlobeCore({ isListening, isSpeaking, emotionalState }: AIGlobeProps) {
     positions[i] = (Math.random() - 0.5) * 10;
   }
 
-  // Color based on emotional state
+  // Professional color scheme - subtle variations of cyan/blue
   const getEmotionColor = () => {
     switch (emotionalState) {
-      case 'happy': return '#00ffff'; // Cyan
-      case 'sad': return '#6366ff'; // Blue
-      case 'anxious': return '#ff6b6b'; // Red
-      case 'calm': return '#9d4edd'; // Purple
-      default: return '#00d4ff'; // Default blue
+      case 'happy': return '#00d4ff'; // Bright cyan
+      case 'sad': return '#0099cc'; // Muted blue
+      case 'anxious': return '#ff8c42'; // Professional orange
+      case 'calm': return '#4a9eff'; // Soft blue
+      default: return '#00bfff'; // Professional cyan
     }
   };
 
@@ -62,7 +62,59 @@ function GlobeCore({ isListening, isSpeaking, emotionalState }: AIGlobeProps) {
 
   return (
     <group>
-      {/* Ambient Particles */}
+      {/* Main Sphere - Dark core like the reference */}
+      <Float speed={1} rotationIntensity={0.05} floatIntensity={0.1}>
+        <mesh ref={meshRef}>
+          <sphereGeometry args={[1.2, 64, 64]} />
+          <meshStandardMaterial
+            color="#0a0a0a"
+            transparent
+            opacity={0.9}
+            emissive="#001122"
+            emissiveIntensity={0.1}
+            roughness={0.1}
+            metalness={0.8}
+          />
+        </mesh>
+
+        {/* Energy Rings - Multiple rotating rings */}
+        <mesh ref={outerRingRef}>
+          <torusGeometry args={[1.4, 0.02, 8, 64]} />
+          <meshStandardMaterial
+            color={getEmotionColor()}
+            transparent
+            opacity={0.9}
+            emissive={getEmotionColor()}
+            emissiveIntensity={1.2}
+          />
+        </mesh>
+
+        {/* Second Energy Ring */}
+        <mesh rotation={[Math.PI / 3, 0, 0]}>
+          <torusGeometry args={[1.3, 0.015, 8, 64]} />
+          <meshStandardMaterial
+            color={getEmotionColor()}
+            transparent
+            opacity={0.7}
+            emissive={getEmotionColor()}
+            emissiveIntensity={0.8}
+          />
+        </mesh>
+
+        {/* Third Energy Ring */}
+        <mesh rotation={[0, Math.PI / 2, Math.PI / 4]}>
+          <torusGeometry args={[1.35, 0.01, 8, 64]} />
+          <meshStandardMaterial
+            color={getEmotionColor()}
+            transparent
+            opacity={0.5}
+            emissive={getEmotionColor()}
+            emissiveIntensity={0.6}
+          />
+        </mesh>
+      </Float>
+
+      {/* Subtle Particle Field */}
       <points ref={particlesRef}>
         <bufferGeometry>
           <bufferAttribute
@@ -74,61 +126,32 @@ function GlobeCore({ isListening, isSpeaking, emotionalState }: AIGlobeProps) {
         </bufferGeometry>
         <pointsMaterial
           color={getEmotionColor()}
-          size={0.02}
+          size={0.01}
           transparent
-          opacity={0.6}
+          opacity={0.3}
         />
       </points>
 
-      {/* Main Globe */}
-      <Float speed={2} rotationIntensity={0.1} floatIntensity={0.2}>
-        <mesh ref={meshRef}>
-          <sphereGeometry args={[1, 64, 64]} />
-          <meshStandardMaterial
-            color={getEmotionColor()}
-            transparent
-            opacity={0.8}
-            emissive={getEmotionColor()}
-            emissiveIntensity={0.2}
-            wireframe={false}
-          />
-        </mesh>
-        
-        {/* Inner Core */}
-        <mesh>
-          <sphereGeometry args={[0.7, 32, 32]} />
-          <meshStandardMaterial
-            color={getEmotionColor()}
-            transparent
-            opacity={0.3}
-            emissive={getEmotionColor()}
-            emissiveIntensity={0.5}
-          />
-        </mesh>
-
-        {/* Outer Ring */}
-        <mesh ref={outerRingRef}>
-          <torusGeometry args={[1.5, 0.05, 16, 100]} />
-          <meshStandardMaterial
-            color={getEmotionColor()}
-            transparent
-            opacity={0.7}
-            emissive={getEmotionColor()}
-            emissiveIntensity={0.3}
-          />
-        </mesh>
-      </Float>
-
-      {/* Dynamic Lighting */}
+      {/* Professional Lighting Setup */}
       <pointLight
-        position={[2, 2, 2]}
-        intensity={isSpeaking ? 2 : isListening ? 1.5 : 1}
+        position={[3, 3, 3]}
+        intensity={isSpeaking ? 3 : isListening ? 2 : 1.5}
         color={getEmotionColor()}
+        decay={2}
       />
       <pointLight
         position={[-2, -2, -2]}
+        intensity={0.8}
+        color="#ffffff"
+        decay={2}
+      />
+      <spotLight
+        position={[0, 5, 0]}
+        angle={0.3}
+        penumbra={0.5}
         intensity={0.5}
         color={getEmotionColor()}
+        target-position={[0, 0, 0]}
       />
     </group>
   );
@@ -160,7 +183,7 @@ export default function AIGlobe({ isListening, isSpeaking, emotionalState }: AIG
           <div className="flex items-center gap-2">
             <motion.div
               className={`w-2 h-2 rounded-full ${
-                isSpeaking ? 'bg-neon-cyan' : isListening ? 'bg-neon-purple' : 'bg-neon-blue'
+                isSpeaking ? 'bg-primary' : isListening ? 'bg-accent-blue' : 'bg-subtle-blue'
               }`}
               animate={{
                 scale: isSpeaking || isListening ? [1, 1.2, 1] : 1,
@@ -170,7 +193,7 @@ export default function AIGlobe({ isListening, isSpeaking, emotionalState }: AIG
                 repeat: isSpeaking || isListening ? Infinity : 0,
               }}
             />
-            <span className="text-sm font-orbitron glow-text-cyan">
+            <span className="text-sm font-mono glow-text-primary">
               {isSpeaking ? 'Speaking' : isListening ? 'Listening' : 'Ready'}
             </span>
           </div>
