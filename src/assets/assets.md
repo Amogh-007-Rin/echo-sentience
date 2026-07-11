@@ -1,0 +1,1 @@
+Instruction to build assests on this application. 

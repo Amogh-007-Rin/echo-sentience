@@ -1,0 +1,1 @@
+Instruction to create types for both server and the client for this application. 
